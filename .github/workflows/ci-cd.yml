@@ -83,14 +83,14 @@ jobs:
       - name: Apply D1 migrations (UAT)
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.API_key }}
+          apiToken: ${{ secrets.API_KEY }}
           accountId: ${{ secrets.ACCOUNT_ID }}
           command: d1 migrations apply p6 --env uat --remote
 
       - name: Deploy to UAT
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.API_key }}
+          apiToken: ${{ secrets.API_KEY }}
           accountId: ${{ secrets.ACCOUNT_ID }}
           command: deploy --env uat
 
@@ -132,13 +132,13 @@ jobs:
       - name: Apply D1 migrations (Production)
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.API_key }}
+          apiToken: ${{ secrets.API_KEY }}
           accountId: ${{ secrets.ACCOUNT_ID }}
           command: d1 migrations apply p6 --env production --remote
 
       - name: Deploy to Production
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.API_key }}
+          apiToken: ${{ secrets.API_KEY }}
           accountId: ${{ secrets.ACCOUNT_ID }}
           command: deploy --env production
