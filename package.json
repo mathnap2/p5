@@ -4,13 +4,20 @@
 	"private": true,
 	"scripts": {
 		"deploy": "wrangler deploy",
+		"deploy:uat": "wrangler deploy --env uat",
+		"deploy:production": "wrangler deploy --env production",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"test": "vitest",
+		"test": "vitest run",
+		"test:coverage": "vitest run --coverage",
+		"test:uat": "vitest run --config vitest.uat.config.mts",
+		"db:migrate:uat": "wrangler d1 migrations apply p6 --env uat --remote",
+		"db:migrate:production": "wrangler d1 migrations apply p6 --env production --remote",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-plugin": "^1.0.0",
+		"@vitest/coverage-istanbul": "~4.1.0",
 		"typescript": "^5.5.2",
 		"vitest": "~4.1.0",
 		"wrangler": "^4"
