@@ -11,19 +11,27 @@ import worker from "../src/index";
 // `Request` to pass to `worker.fetch()`.
 const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
 
+const expectedUsers = [{ id: 1, name: "mathias", email: "mathias@example.com" }];
+
 describe("Hello World worker", () => {
-	it("responds with Hello World! (unit style)", async () => {
+	it("responds with the worker message and seeded users (unit style)", async () => {
 		const request = new IncomingRequest("http://example.com");
 		// Create an empty context to pass to `worker.fetch()`.
 		const ctx = createExecutionContext();
 		const response = await worker.fetch(request, env, ctx);
 		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
 		await waitOnExecutionContext(ctx);
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World! from mathias"`);
+
+		const body = await response.json<{ message: string; dbData: unknown }>();
+		expect(body.message).toBe("Hello from Cloudflare Workers!");
+		expect(body.dbData).toEqual(expectedUsers);
 	});
 
-	it("responds with Hello World! (integration style)", async () => {
+	it("responds with the worker message and seeded users (integration style)", async () => {
 		const response = await SELF.fetch("https://example.com");
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World! from mathias"`);
+
+		const body = await response.json<{ message: string; dbData: unknown }>();
+		expect(body.message).toBe("Hello from Cloudflare Workers!");
+		expect(body.dbData).toEqual(expectedUsers);
 	});
 });

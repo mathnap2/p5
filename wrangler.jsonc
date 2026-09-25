@@ -9,7 +9,33 @@
 		{
 			"binding": "p6",
 			"database_name": "p6",
-			"database_id": "61df9fc4-ef47-445c-947d-baae4991ab00"
+			"database_id": "61df9fc4-ef47-445c-947d-baae4991ab00",
+			"migrations_dir": "migrations"
 		}
-	]
+	],
+	// Environments used by the CI/CD pipeline (.github/workflows/ci-cd.yml).
+	"env": {
+		"uat": {
+			"name": "p5-uat",
+			"d1_databases": [
+				{
+					"binding": "p6",
+					"database_name": "p6-uat",
+					"database_id": "9d3cfa3c-5590-47f8-9b8d-158fd3a55ab0",
+					"migrations_dir": "migrations"
+				}
+			]
+		},
+		"production": {
+			"name": "p5-production",
+			"d1_databases": [
+				{
+					"binding": "p6",
+					"database_name": "p6-production",
+					"database_id": "2f24fef9-3667-40db-a340-70b03e3bcf3c",
+					"migrations_dir": "migrations"
+				}
+			]
+		}
+	}
 }
